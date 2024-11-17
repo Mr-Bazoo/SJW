@@ -1,73 +1,38 @@
 from django.db import models
 
-class Blok_week(models.Model):
-    blok = models.CharField(max_length=50)
-
-    class Meta:
-        verbose_name_plural = "Blok_week"
-
-class Lessen(models.Model):
-    les = models.CharField(max_length=2)  # Opslag voor lessen, bijvoorbeeld 'W1' of 'G2'
-    les_blok = models.ManyToManyField(Blok_week, related_name='lessen')
-
-    class Meta:
-        verbose_name_plural = "Lessen"
-
-class MyInteger(models.Model):
-    my_model = models.ForeignKey(Lessen, on_delete=models.CASCADE, related_name='numbers')
-    value = models.IntegerField()  # Opslag voor een geheel getal gekoppeld aan een les
-
-    class Meta:
-        verbose_name_plural = "MyInteger"
-
 class Kind(models.Model):
-    naam = models.CharField(max_length=25)  # Opslag voor namen van kinderen
-    kind_blok = models.ManyToManyField(Blok_week, related_name='kinderen')
+    naam = models.CharField(max_length=50)
 
     class Meta:
-        verbose_name_plural = "Kind"
+        verbose_name_plural = "Kinderen"
 
-class Doelen(models.Model):
-    kind = models.ForeignKey(Kind, on_delete=models.CASCADE)
-    leerdoel = models.CharField(max_length=50)  # Opslag voor specifieke leerdoelen voor een kind
-    doel_blok = models.ManyToManyField(Blok_week, related_name='doelen')
+    def __str__(self):
+        return self.naam
 
-    class Meta:
-        verbose_name_plural = "Doelen"
+class Leerdoel(models.Model):
+    blok = models.ForeignKey('Blok', related_name='leerdoelen', on_delete=models.CASCADE)
+    doel = models.CharField(max_length=50)
+    kinderen = models.ManyToManyField('Kind', related_name='leerdoelen')
 
-class MomentVanVereisteBeheersing(models.Model):
-    moment = models.CharField(max_length=50)  # Beschrijft een tijdsperiode waarin beheersing vereist is
-    moment_blok = models.ManyToManyField(Blok_week, related_name='momenten')
-
-    class Meta:
-        verbose_name_plural = "MomentVanVereisteBeheersing"
-
-class Voorkennis(models.Model):
-    voorkennis = models.CharField(max_length=50)  # Opslag voor benodigde voorkennis
-    kennis_blok = models.ManyToManyField(Blok_week, related_name='voorkennis')
+    # Nieuwe velden per leerdoel
+    lessen = models.CharField(max_length=10, blank=True, null=True)
+    voorkennis = models.CharField(max_length=50, blank=True, null=True)
+    opmerkingen = models.CharField(max_length=150, blank=True, null=True)
+    sleepdoel = models.BooleanField(default=False)
+    automatiseringsdoelen = models.BooleanField(default=False)
 
     class Meta:
-        verbose_name_plural = "Voorkennis"
+        verbose_name_plural = "Leerdoelen"
 
-class SignaleringGroep(models.Model):
-    doel = models.ForeignKey(Doelen, on_delete=models.CASCADE)
-    signalering = models.CharField(max_length=50)  # Signaleringsinformatie gekoppeld aan een doel
-    signalering_blok = models.ManyToManyField(Blok_week, related_name='signaleringen')
+    def __str__(self):
+        return self.doel
 
-    class Meta:
-        verbose_name_plural = "SignaleringGroep"
-
-class Opmerkingen(models.Model):
-    opmerking = models.CharField(max_length=150)  # Opslag voor extra opmerkingen
-    opmerking_blok = models.ManyToManyField(Blok_week, related_name='opmerkingen')
+class Blok(models.Model):
+    bloknummer = models.PositiveSmallIntegerField()
+    week = models.PositiveSmallIntegerField()
 
     class Meta:
-        verbose_name_plural = "Opmerkingen"
+        verbose_name_plural = "Blokken"
 
-class Behaaldstatus(models.Model):
-    sleepdoel = models.BooleanField(default=False)  # Boolean veld om aan te geven of een doel een sleepdoel is
-    automatiseringsdoelen = models.BooleanField(default=False)  # Boolean veld voor automatiseringsdoelen
-    status_blok = models.ManyToManyField(Blok_week, related_name='behaaldstatussen')
-
-    class Meta:
-        verbose_name_plural = "Behaaldstatus"
+    def __str__(self):
+        return f"Blok {self.bloknummer} - Week {self.week}"
