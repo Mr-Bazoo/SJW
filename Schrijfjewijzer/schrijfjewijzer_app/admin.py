@@ -1,5 +1,14 @@
 from django.contrib import admin
+from django import forms
 from .models import Blok, Leerdoel, Kind
+
+class LeerdoelForm(forms.ModelForm):
+    class Meta:
+        model = Leerdoel
+        fields = '__all__'
+        widgets = {
+            'lessen': forms.TextInput(attrs={'size': '5'}),  # Pas de grootte van het invoerveld aan
+        }
 
 class KindInline(admin.TabularInline):
     model = Leerdoel.kinderen.through  # Koppeling tussen Leerdoelen en Kinderen
@@ -8,7 +17,7 @@ class KindInline(admin.TabularInline):
 class LeerdoelInline(admin.TabularInline):
     model = Leerdoel
     extra = 1
-    fields = ('doel', 'lessen', 'voorkennis', 'opmerkingen', 'sleepdoel', 'automatiseringsdoelen')
+    form = LeerdoelForm  # Gebruik aangepaste form voor inline
 
 @admin.register(Blok)
 class BlokAdmin(admin.ModelAdmin):
