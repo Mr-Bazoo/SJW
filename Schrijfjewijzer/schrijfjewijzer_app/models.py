@@ -29,7 +29,7 @@ class Blok(models.Model):
 
 class Leerdoel(models.Model):
     blok = models.ForeignKey('Blok', related_name='leerdoelen', on_delete=models.CASCADE)
-    doel = models.CharField(max_length=50)
+    doel = models.CharField(max_length=150)
     kinderen = models.ManyToManyField('Kind', related_name='leerdoelen')
     lessen = models.CharField(max_length=10, blank=True, null=True)
     voorkennis = models.CharField(max_length=50, blank=True, null=True)

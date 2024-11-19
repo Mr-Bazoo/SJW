@@ -27,6 +27,6 @@ class KindAdmin(admin.ModelAdmin):
 class LeerdoelAdmin(admin.ModelAdmin):
     list_display = ('doel', 'blok', 'sleepdoel', 'automatiseringsdoelen','signalering_groep')
     list_filter = ('sleepdoel', 'automatiseringsdoelen')
-    search_fields = ('doel', 'voorkennis', 'opmerkingen')
+    search_fields = ('doel', 'blok', 'week', 'opmerkingen')
     inlines = [LeerdoelScoreInline]  # Toon scores van alle kinderen voor dit leerdoel.
     exclude = ('kinderen',)  # Voorkom dubbele velden door de ManyToMany-weergave te beheren via inlines
