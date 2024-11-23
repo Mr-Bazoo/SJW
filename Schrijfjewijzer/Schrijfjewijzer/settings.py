@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'schrijfjewijzer_app',
+    'Kaartjes_app',
 ]
 
 MIDDLEWARE = [
