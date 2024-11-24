@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liever Lui dan Moe</title>
+    <!-- Load the CSS file -->
+    <link rel="stylesheet" href="{% static 'your_app/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">B</div>
+        <nav>
+            <ul>
+                <li><a href="#">Kaartjes maker</a></li>
+                <li><a href="#">Schrijf je wijzer</a></li>
+                <li><a href="#">Community</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button>Sign in</button>
+                <button>Register</button>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <h1>Liever lui dan moe</h1>
+            <p>Stroomlijn je onderwijs</p>
+            <div class="hero-buttons">
+                <button>Button</button>
+                <button>Button</button>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <img src="{% static 'your_app/images/gear-icon.png' %}" alt="Gear icon">
+            </div>
+            <div class="feature">
+                <img src="{% static 'your_app/images/brain-icon.png' %}" alt="Brain icon">
+            </div>
+        </section>
+
+        <section class="info">
+            <h2>Via technologie</h2>
+            <p>Inzicht in leren</p>
+            <div class="info-cards">
+                <div class="card">
+                    <h3>Title</h3>
+                    <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very short story.</p>
+                </div>
+                <div class="card">
+                    <h3>Title</h3>
+                    <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very short story.</p>
+                </div>
+                <div class="card">
+                    <h3>Title</h3>
+                    <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very short story.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-logo">B</div>
+        <div class="footer-columns">
+            <div>
+                <h4>Use cases</h4>
+                <ul>
+                    <li><a href="#">UI design</a></li>
+                    <li><a href="#">UX design</a></li>
+                    <li><a href="#">Wireframing</a></li>
+                    <li><a href="#">Diagramming</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#">Design</a></li>
+                    <li><a href="#">Prototyping</a></li>
+                    <li><a href="#">Collaboration</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Best practices</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
